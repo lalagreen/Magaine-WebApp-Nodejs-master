@@ -36,7 +36,7 @@ router.use(session({
     resave: true,
     saveUninitialized: false,
     store: new MongoStore({
-        url: 'DBurl',
+        url: process.env.MONGODB_URI,
     })
 }));
 

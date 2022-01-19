@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express();
-const bodyParser = require('body-parser');
 let request = require('request');
 const path = require('path');
 const Article = require('../models/index.js').article;

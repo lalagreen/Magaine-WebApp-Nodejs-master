@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 app.use(express.urlencoded({extended: false}));
@@ -11,11 +13,13 @@ const path = require('path');
 // push notification
 const webpush = require('web-push');
 
-const publicVapidKey = "AoGAd2C9nuQPA4E7Vu65sK2jd8nlJdj4jmxCmeo1liUGwM4RmhLIrK/v/m90pHx5-gnoktdsvhPeeeBb_7WoDKQHouRr6zXqefprXE";
-const privateVapidKey  = "4FJVk0lublowONWPiifG3F024yXfvkoMnckar0gjEUL";
-webpush.setVapidDetails('mailto:stephadhok.co@gmail.com@gmail.com', publicVapidKey, privateVapidKey);
+const vapidKeys = webpush.generateVAPIDKeys();
 
-fs.writeFileSync(path.join(__dirname, '/public/publickey.txt'), publicVapidKey);
+// Prints 2 URL Safe Base64 Encoded Strings
+console.log(vapidKeys.publicKey, vapidKeys.privateKey);
+webpush.setVapidDetails('mailto:stephadhok.co@gmail.com', vapidKeys.publicKey, vapidKeys.privateKey);
+
+fs.writeFileSync(path.join(__dirname, '/public/publickey.txt'), vapidKeys.publicKey);
 
 const port = process.env.PORT || 4000;
 

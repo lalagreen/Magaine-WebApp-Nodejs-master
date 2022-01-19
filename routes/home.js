@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express();
-const bodyParser = require('body-parser');
 let request = require('request');
-router.set(bodyParser.urlencoded({extended: false}));
-router.set(bodyParser.json());
+router.set(express.urlencoded({extended: false}));
+router.set(express.json());
 router.use(express.static('public'));
 const path = require('path');
 const pug = require('pug');

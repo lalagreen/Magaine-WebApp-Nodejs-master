@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express();
-const bodyParser = require('body-parser');
-router.set(bodyParser.urlencoded({extended: false}));
-router.set(bodyParser.json());
+router.set(express.urlencoded({extended: false}));
+router.set(express.json());
 
 const NewsletterEmail = require('../models/index.js').newsletterEmail;
 const Newsletter = require('../models/index.js').newsletter;
@@ -14,7 +13,7 @@ router.post('/newsletter', (req, res)=>{
             
             let message= await Newsletter.find({}).limit(1);
             
-            let verifier = new Verifier("at_Nx6Irkhhm4CWSEXp1UxIeibMFG5nE");
+            let verifier = new Verifier("at_nX8MTE5TTHSoqvrW0uJBwq4x2ISbk");
                 verifier.verify(req.body.email, (err, data) => {
                     if (err) {
                         res.status(201).json({success: false, message: 'Email address is not valid or available'});
